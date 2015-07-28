@@ -124,13 +124,13 @@
 					'onCycle': (function (result) {
 						return function(event) {
 							if (event.target.aborted) return;
-							result.innerText = Math.round(event.target.hz) + ' ops/sec';
+							result.innerText = Math.round(event.target.hz).toLocaleString() + ' ops/sec';
 						};
 					})(results[i]),
 					'onComplete': (function (result) {
 						return function(event) {
 							if (event.target.aborted) return;
-							result.innerText = Math.round(event.target.hz) + ' ops/sec';
+							result.innerText = Math.round(event.target.hz).toLocaleString() + ' ops/sec';
 							result.classList.remove('running');
 						};
 					})(results[i])
