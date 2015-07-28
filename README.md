@@ -10,7 +10,7 @@ a JavaScript benchmarking utility
  
 ### Advantages
  - no need for logins / name & email / reCAPTCHA
- - "always" up
+ - ["always" up](//status.github.com)
  - only uses static resources, so easy to serve locally & works offline (just open the HTML file)
  
 ## Contributing
