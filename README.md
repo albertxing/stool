@@ -12,6 +12,9 @@ a JavaScript benchmarking utility
  - no need for logins / name & email / reCAPTCHA
  - ["always" up](//status.github.com)
  - only uses static resources, so easy to serve locally & works offline (just open the HTML file)
+
+## Acknowledgements
+ - built using [benchmarkjs](//benchmarkjs.com)
  
 ## Contributing
 
