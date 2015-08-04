@@ -40,7 +40,6 @@ function run() {
 	for (var i = 0; i < cases.length; i++) {
 		results[i].classList.add('running');
 		results[i].innerText = 'queued';
-    console.log(common.value + cases[i].value);
 		suite.add(titles[i].value, common.value + cases[i].value, {
 			'onCycle': (function (result) {
 				return function(event) {
