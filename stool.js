@@ -27,6 +27,7 @@ function run() {
 	var titles = document.getElementsByClassName('title');
 	var cases = document.getElementsByClassName('case');
 	var results = document.getElementsByClassName('result');
+  var common = document.getElementById('common');
 
 	suite = new Benchmark.Suite;
 	suite.on('complete', function() {
@@ -39,7 +40,8 @@ function run() {
 	for (var i = 0; i < cases.length; i++) {
 		results[i].classList.add('running');
 		results[i].innerText = 'queued';
-		suite.add(titles[i].value, cases[i].value, {
+    console.log(common.value + cases[i].value);
+		suite.add(titles[i].value, common.value + cases[i].value, {
 			'onCycle': (function (result) {
 				return function(event) {
 					if (event.target.aborted) return;
