@@ -96,10 +96,13 @@ function share() {
 
 	var titles = document.getElementsByClassName('title');
 	var cases = document.getElementsByClassName('case');
+  var common = document.getElementById('common');
 
 	for (var i = 0; i < cases.length; i++) {
-		body.files[titles[i].value || '__empty' + i] = {'content': cases[i].value};
+    if(cases[i].value) 
+      body.files[titles[i].value || '__empty' + i] = {'content': cases[i].value};
 	}
+  if(common.value) body.files['__common'] = {'content': common.value};
 
 	var req = new XMLHttpRequest();
 	req.open('post', 'https://api.github.com/gists', true);
@@ -121,9 +124,13 @@ function parse() {
 		var result = JSON.parse(req.responseText);
 		var files = result.files;
 		for (var file in files) {
-			var tr = add();
-			tr.getElementsByClassName('title')[0].value = file;
-			tr.getElementsByClassName('case')[0].value = files[file].content;
+      if(file === '__common'){
+        document.getElementById('common').value = files[file].content;
+      } else {
+        var tr = add();
+        tr.getElementsByClassName('title')[0].value = file;
+        tr.getElementsByClassName('case')[0].value = files[file].content;
+      }
 		}
 	}
 	req.send();
