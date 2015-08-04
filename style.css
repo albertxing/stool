@@ -2,6 +2,11 @@ body {
 	width: 90%;
 	max-width: 800px;
 	margin: 4em auto;
+	font: 12pt Helvetia, Arial, sans-serif;
+}
+
+section {
+	margin: 0 0 4em;
 }
 
 table {

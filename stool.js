@@ -72,16 +72,75 @@ function add() {
 	})(tr);
 
 	var inputs = tr.getElementsByClassName('input');
-	for (var i = 0; i < inputs.length; i++)
-		inputs[i].onkeydown = abort;
+	for (var i = 0; i < inputs.length; i++) {
+		inputs[i].onkeydown = function () {
+			abort();
+			var shareResult = document.getElementById('share-result');
+			shareResult.href = shareResult.innerText = '';
+		}
+	}
 
 	s.appendChild(tr);
 	clear();
+
+	return tr;
 }
 
-document.getElementById('add').onclick = add
-document.getElementById('run').onclick = run
-document.getElementById('abort').onclick = abort
+function share() {
+	var body = {
+		'public': true,
+		'files': {}
+	}
 
-add();
-add();
+	var titles = document.getElementsByClassName('title');
+	var cases = document.getElementsByClassName('case');
+
+	for (var i = 0; i < cases.length; i++) {
+		body.files[titles[i].value || '__empty' + i] = {'content': cases[i].value};
+	}
+
+	var req = new XMLHttpRequest();
+	req.open('post', 'https://api.github.com/gists', true);
+	req.onload = function() {
+		var result = JSON.parse(req.responseText);
+		var shareResult = document.getElementById('share-result');
+		shareResult.href = shareResult.innerText = window.location + '#' + result.id;
+	}
+	req.send(JSON.stringify(body));
+}
+
+function parse() {
+	if (!window.location.hash.length) return false;
+
+	var id = window.location.hash.substring(1);
+	var req = new XMLHttpRequest();
+	req.open('get', 'https://api.github.com/gists/' + id, true);
+	req.onload = function() {
+		var result = JSON.parse(req.responseText);
+		var files = result.files;
+		for (var file in files) {
+			var tr = add();
+			tr.getElementsByClassName('title')[0].value = file;
+			tr.getElementsByClassName('case')[0].value = files[file].content;
+		}
+	}
+	req.send();
+
+	var shareResult = document.getElementById('share-result');
+	shareResult.href = shareResult.innerText = window.location;
+
+	return true;
+}
+
+document.getElementById('add').onclick = function() {
+	add();
+	return false;
+}
+document.getElementById('run').onclick = run;
+document.getElementById('abort').onclick = abort;
+document.getElementById('share').onclick = share;
+
+if (!parse()) {
+	add();
+	add();
+}
