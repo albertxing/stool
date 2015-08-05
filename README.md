@@ -14,7 +14,7 @@ a JavaScript benchmarking utility
  - only uses static resources, so easy to serve locally & works offline (just open the HTML file)
 
 ## Acknowledgements
- - built using [benchmarkjs](//benchmarkjs.com)
+ - built using [benchmarkjs](http://benchmarkjs.com)
  
 ## Contributing
 
