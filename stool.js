@@ -27,6 +27,7 @@ function run() {
 	var titles = document.getElementsByClassName('title');
 	var cases = document.getElementsByClassName('case');
 	var results = document.getElementsByClassName('result');
+  var common = document.getElementById('common');
 
 	suite = new Benchmark.Suite;
 	suite.on('complete', function() {
@@ -39,7 +40,7 @@ function run() {
 	for (var i = 0; i < cases.length; i++) {
 		results[i].classList.add('running');
 		results[i].innerText = 'queued';
-		suite.add(titles[i].value, cases[i].value, {
+		suite.add(titles[i].value, common.value + cases[i].value, {
 			'onCycle': (function (result) {
 				return function(event) {
 					if (event.target.aborted) return;
@@ -94,10 +95,13 @@ function share() {
 
 	var titles = document.getElementsByClassName('title');
 	var cases = document.getElementsByClassName('case');
+  var common = document.getElementById('common');
 
 	for (var i = 0; i < cases.length; i++) {
-		body.files[titles[i].value || '__empty' + i] = {'content': cases[i].value};
+    if(cases[i].value) 
+      body.files[titles[i].value || '__empty' + i] = {'content': cases[i].value};
 	}
+  if(common.value) body.files['__common'] = {'content': common.value};
 
 	var req = new XMLHttpRequest();
 	req.open('post', 'https://api.github.com/gists', true);
@@ -119,9 +123,13 @@ function parse() {
 		var result = JSON.parse(req.responseText);
 		var files = result.files;
 		for (var file in files) {
-			var tr = add();
-			tr.getElementsByClassName('title')[0].value = file;
-			tr.getElementsByClassName('case')[0].value = files[file].content;
+      if(file === '__common'){
+        document.getElementById('common').value = files[file].content;
+      } else {
+        var tr = add();
+        tr.getElementsByClassName('title')[0].value = file;
+        tr.getElementsByClassName('case')[0].value = files[file].content;
+      }
 		}
 	}
 	req.send();
