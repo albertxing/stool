@@ -5,7 +5,7 @@ a JavaScript benchmarking utility
 [jsPerf](//jsperf.com) has been running into some [spam issues lately](//github.com/jsperf/jsperf.com/issues/18), and I decided to create a similar tool that was simpler and completely server-free.
 
 ### Disadvantages compared to jsPerf
- - does not offer methods to save or share results
+ - ~~does not offer methods to save or share results~~ Added! See #2
  - does not keep record of performance across different systems
  
 ### Advantages
