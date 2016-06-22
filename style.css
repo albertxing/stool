@@ -48,6 +48,10 @@ input, textarea {
 	resize: vertical;
 }
 
+textarea {
+	font-family: monospace;
+}
+
 .result.running {
 	color: #ccc;
 }
