@@ -1,68 +1,120 @@
 body {
-	width: 90%;
-	max-width: 800px;
-	margin: 4em auto;
-	font: 12pt Helvetia, Arial, sans-serif;
+	margin: 0;
+	font: 10pt -apple-system, 'BlinkSystem', 'Helvetica Neue', sans-serif;
+	display: flex;
 }
 
-section {
-	margin: 0 0 4em;
+.column {
+	height: 100%;
 }
 
-table {
-	border-spacing: 0;
+.sidebar {
+	width: 240px;
+	height: 100%;
+	border-right: 1px solid #ddd;
+	position: relative;
+}
+
+.box {
+	background: none;
+	border: none;
+	border-bottom: 1px solid #eee;
+	box-sizing: border-box;
 	width: 100%;
+	padding: 10pt;
+	margin: 0;
 }
 
-th, td {
-	vertical-align: top;
-	padding: 0 0 1em 0;
+.box.header {
+	font-size: 16pt;
+	color: #444;
 }
 
-th {
+.sidebar .box:focus {
+	outline: none;
+}
+
+.sidebar .box.title {
+	font-size: 16pt;
+}
+
+.sidebar .box.desc {
+	font-size: 10pt;
+	resize: none;
+	min-height: 8em;
+}
+
+.sidebar .box.button {
+	cursor: pointer;
 	text-align: left;
+	font-size: 12pt;
+	color: rgba(0,0,0,.6);
+	border-bottom: none;
 }
-
-th.th-result {
-	width: 200px;
-}
-
-th.th-remove {
-	width: 0;
-}
-
-td.inputs {
-	padding-right: 1em;
-}
-
-.remove {
-	position: absolute;
-	margin-left: -6em;
-	width: 5em;
-}
-
-input, textarea {
-	margin: 0 0 1em 0;
-	width: 100%;
+.sidebar .box.button:before {
+	content: "";
 	display: block;
-	resize: vertical;
+	float: right;
+	width: 20px;
+	height: 1em;
+}
+.sidebar .box.button:hover {
+	color: rgba(0,0,0,.8);
 }
 
-textarea {
-	font-family: monospace;
+.sidebar .box.run {
+	background: #ced;
+}
+.sidebar .box.run:before {
+	content: "";
+	display: block;
+	float: right;
+	width: 20px;
+	height: 1em;
 }
 
-.result.running {
-	color: #ccc;
+.sidebar .box.share {
+	background: #cde;
+}
+.sidebar .box.share:before {
 }
 
-#abort {
-	display: none;
-}
-.running #abort {
-	display: initial;
+.sidebar .box.bottom {
+	position: absolute;
+	bottom: 0;
+	border-bottom: none;
+	border-top: 1px solid #eee;
+	padding-top: 0.5em;
 }
 
-.running #run {
-	display: none;
+.sidebar .box.bottom .info {
+	color: #888;
+	font-style: italic;
+}
+
+.sidebar .box.bottom .logo {
+	font-size: 12pt;
+	margin-top: 1em;
+}
+
+.setup {
+	flex: 0;
+	flex-grow: 2;
+	border-right: 1px solid #ddd;
+}
+
+.editor {
+	width: 100%;
+	height: 100%;
+}
+
+.editor .CodeMirror {
+	height: 100%;
+	font-family: Menlo, monospace;
+	font-size: 8pt;
+}
+
+.tests {
+	flex: 0;
+	flex-grow: 3;
 }

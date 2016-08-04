@@ -3,36 +3,47 @@
 	<title>stool</title>
 	<meta name="Description" content="stool: a JavaScript benchmarking utility">
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="cm.css">
+	<link rel="stylesheet" href="neo.css">
 </head>
 <body>
-	<div id="inject"></div>
-	<h1>stool</h1>
-	
-	<p>
-		A fully client-side JS benchmarking utility, built off Benchmark.js. <a href="https://github.com/albertxing/stool">Open source on GitHub.</a>
-	</p>
-	
-	<section>
-		<h3>Setup code</h3>
-		<textarea rows="6" id="common" class="common input" placeholder="Common Code"></textarea>
-	</section>
-	<section>
-		<h3>Test cases</h3>
-		<table id="suite">
-			<tr>
-				<th class="th-remove"></th>
-				<th class="th-case">Case</th>
-				<th class="th-result">Result</th>
-			</tr>
-		</table>
-		<a href="#" id="add">+ Add test case</a>
-	</section>
-	<button id="run">Run!</button>
-	<button id="abort">Abort</button>
-	<button id="share">Share</button>
-	<a id="share-result"></a>
+	<div class="column sidebar">
+		<input class="box title" type="text" name="title" placeholder="Title">
+		<textarea class="box desc" name="desc" placeholder="Description - click to edit"></textarea>
+		<button class="box button run">Run</button>
+		<button class="box button share">Share</button>
+		<div class="box bottom">
+			<div class="info">
+				<p>a JavaScript benchmarking utility</p>
+				<p>powered by Benchmark.js<br>written by Albert Xing</p>
+			</div>
+			<div class="logo">stool</div>
+		</div>
+	</div>
+	<div class="column setup">
+		<div id="setup" class="editor"></div>
+	</div>
+	<div class="column tests">
+		<div id="test" class="editor"></div>
+	</div>
+	<script src="cm.js"></script>
 	<script src="benchmark.js"></script>
 	<script src="stool.js"></script>
-	<script async="async">!function(){var e="https://alight.axg.io:6443",o=new XMLHttpRequest;o.open("post",e),o.setRequestHeader("Content-type","application/x-www-form-urlencoded"),o.onload=function(){if(o.responseText){var e=JSON.parse(o.responseText).vid;localStorage.avid=e}};var t="action=enter&url="+window.location+"&referrer="+document.referrer;localStorage&&localStorage.avid&&(t+="&avid="+localStorage.avid),o.send(t),window.onbeforeunload=function(){o=new XMLHttpRequest,o.open("post",e,!0),o.setRequestHeader("Content-type","application/x-www-form-urlencoded"),o.send("action=leave")}}();</script>
+
+	<script type="text/javascript">
+		var setupEditor = CodeMirror(document.getElementById("setup"), {
+			value: "// setup code\n",
+			mode: "javascript",
+			lineNumbers: true,
+			theme: "neo",
+		});
+
+		var testEditor = CodeMirror(document.getElementById("test"), {
+			value: "// test code\n",
+			mode: "javascript",
+			lineNumbers: true,
+			theme: "neo",
+		});
+	</script>
 </body>
 </html>
